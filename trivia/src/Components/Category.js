@@ -1,12 +1,12 @@
 import React from "react";
 
-const Category = ({name}) => {
+const Category = ({name, id, clickHandler}) => {
     return (
-      <ul>
-        <button className="category-list">
-            {name}
+      //onClick needs to receive a function
+      
+        <button className="category-btn" onClick={() => clickHandler(id)}>  
+        {name}
         </button>
-      </ul>
     );
 };
 

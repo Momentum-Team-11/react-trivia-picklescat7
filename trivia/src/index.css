@@ -10,4 +10,16 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  margin: 4px;
+  /* background-color:plum; */
+  /* color: gray;  */
 }
