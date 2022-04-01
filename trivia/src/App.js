@@ -7,17 +7,20 @@ import axios from "axios";
 const App = () => {
   const [categories, setCategories] = useState([]); //sets categories useState to empty array initially (null??)
   const [questionArray, setQuestionArray] = useState([]); 
-  const [defaultView, setDefaultView] = useState(true)
+  const [oneQuestion, setOneQuestion] = useState([]);
+  const [defaultView, setDefaultView] = useState(true) //aka "home page"
 
 
   const getQuestionArray = (categId) => {
     //make axios get request
-    axios.get(`https://opentdb.com/api.php?amount=10&category=${categId}&type=boolean`)
+    axios.get(`https://opentdb.com/api.php?amount=10&category=${categId}&type=multiple`)
       .then((response) => {
         setQuestionArray(response.data.results);
+        setOneQuestion(response.data.results[0]);
         setDefaultView(false);
-    console.log("Click Happened")
-    console.log(response)
+    console.log("Click Happened");
+    console.log(response);
+    console.log(oneQuestion); //displays one question set - in theory - not set up yet
 });
     
   }
@@ -42,7 +45,7 @@ const App = () => {
         {categories.map((category) => (
           <Category
             name={category.name}
-            id={category.id}
+            categId={category.id}
             key={category.id}
             clickHandler={getQuestionArray}
           />
@@ -51,18 +54,21 @@ const App = () => {
     </> :
       <>
       <h2>Let's play True or False!</h2>
+      <button onClick={() => setDefaultView(true)}>
+            Return Home (exit current game)
+          </button>
       <div className="question-view">
         {/* map creates a new array */}
         {questionArray.map((quest, index) => (
           <Question
             key={index}
+            questId={index}
             question={quest.question}
             correct_answer={quest.correct_answer}
             incorrect_answers={quest.incorrect_answers}
             // clickHandler={getQuestionArray}
           />
         ))}
-        console.log(incorrect_answers)
       </div>
       </> 
       }
