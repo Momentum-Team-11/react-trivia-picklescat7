@@ -1,0 +1,96 @@
+import "./index.css";
+import Category from "./Components/dontuseCategory";
+import Question from "./Components/dontuseQuestion";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const App = () => {
+  const [categories, setCategories] = useState([]); //sets categories useState to empty array initially (null??)
+  const [questionArray, setQuestionArray] = useState([]); 
+  const [oneQuestion, setOneQuestion] = useState([]);
+  const [defaultView, setDefaultView] = useState(true) //aka "home page"
+
+  //useEffect(() => {}, []) the dependency array ([]) tells it to run just once, not a million times
+
+  const getQuestionArray = (categId) => {
+    //make axios get request
+    axios.get(`https://opentdb.com/api.php?amount=10&category=${categId}&type=multiple`)
+      .then((response) => {
+        setDefaultView(false);
+        setQuestionArray(response.data.results);
+        setOneQuestion(response.data.results[0]);        
+    console.log("Click Happened");
+    console.log(response);
+    console.log(oneQuestion); //displays first question set 
+});
+    
+  }
+
+  useEffect(() => {  //this is a hook. Instructions to component to do something after it renders somethign on the page
+  //     make ajax request here
+  //     inside the '.then'  set state for categories
+    axios.get("https://opentdb.com/api_category.php")
+        .then((response) => {
+          setCategories(response.data.trivia_categories);
+    });
+  }, []);
+
+  return (
+    <> 
+      <h1>Welcome to TRIVIA!!</h1>
+      {defaultView ? 
+      <>
+      <h2>Choose a topic and let's play!</h2>
+      <div className="category-list">
+        {/* map creates a new array */}
+        {categories.map((category) => (
+          <Category
+            name={category.name}
+            categId={category.id}
+            key={category.id}
+            clickHandler={getQuestionArray}
+          />
+        ))}
+      </div>
+    </> :
+      <>
+      <h2>Let's play True or False!</h2>
+      <button onClick={() => setDefaultView(true)}>
+            Return Home (exit current game)
+          </button>
+      <div className="question-view">
+        {/* map creates a new array */}
+        {questionArray.map((quest, index) => (    //[questionArray[0]] gets first question, but not sure what to do from there
+          <Question
+            key={index}
+            questId={index}
+            question={quest.question}
+            correct_answer={quest.correct_answer}
+            incorrect_answers={quest.incorrect_answers}
+            // clickHandler={getQuestionArray}
+          />
+        ))}
+      </div>
+      </> 
+      }
+    </>
+    )}
+export default App;
+// {quest.incorrect_answers.map((incorrect, idx) => (
+              
+//   )
+//one object- trivia categories
+//let newAnswers = [correctAnswer, ...answers];
+// {dataItems.map((item, index) => (
+//   <div key={index}>
+//     <h1>{item.title}</h1>
+//     {item.content.map((c, i) => (
+//       <div key={i}>
+//         <img src={c.imageUrl} />
+//         <h3>{c.title}</h3>
+//         <h3>{c.description}</h3>
+//         <hr />
+//       </div>
+//     ))}
+//   </div>
+// ))}

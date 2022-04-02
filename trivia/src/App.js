@@ -1,95 +1,82 @@
-import "./index.css";
-import Category from "./Components/Category";
-import Question from "./Components/Question";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import "./styles.css";
+import { useState, useEffect } from "react";
+import axios from "axios"
+import CategorySelect from "./Components/CategorySelect";
+import QuestionSet from "./Components/QuestionSet";
+import EndGame from "./Components/EndGame";
+
 
 const App = () => {
-  const [categories, setCategories] = useState([]); //sets categories useState to empty array initially (null??)
-  const [questionArray, setQuestionArray] = useState([]); 
-  const [oneQuestion, setOneQuestion] = useState([]);
-  const [defaultView, setDefaultView] = useState(true) //aka "home page"
+  const categoriesURL = "https://opentdb.com/api_category.php"; 
+  const questionsURL = "https://opentdb.com/api.php?amount=1&type=boolean&category="; 
+  //helper function below to set state
+  const [categories, setCategories] = useState([]); //set to empty array so state knows what shape of data
+  const [selected, setSelected] = useState(null);
+  const [questions, setQuestions] = useState([]);
+  const [score, setScore] = useState(0);
+  const [endGame, setEndGame] = useState(false);
 
+//ask for a list of categories
+  useEffect(() => {
+    axios.get(categoriesURL).then((response) => { //.then is a promise; expecting to recieve a response 'response' is just a symantic name- coul dbe anything;  
+    setCategories(response.data.trivia_categories);  //call-back function- give one function to another function as an argument
+    });
+  }, []);  //dependency array 
 
-  const getQuestionArray = (categId) => {
-    //make axios get request
-    axios.get(`https://opentdb.com/api.php?amount=10&category=${categId}&type=multiple`)
-      .then((response) => {
-        setQuestionArray(response.data.results);
-        setOneQuestion(response.data.results[0]);
-        setDefaultView(false);
-    console.log("Click Happened");
-    console.log(response);
-    console.log(oneQuestion); //displays one question set - in theory - not set up yet
-});
-    
+//useEffect(() => {}, []) w/out dependency array you get an endless request
+
+  useEffect(() => {
+    axios.get(questionsURL + `${selected}`).then((response) => {
+      console.log(response);
+      setQuestions(response.data.results);
+    });
+  }, [selected])
+
+  if (endGame) {
+    return (
+      <div>
+        <EndGame
+          score={score}
+      />
+    </div>
+    )
   }
 
-  useEffect(() => {  //this is a hook. Instructions to component to do something after it renders somethign on the page
-  //     make ajax request here
-  //     inside the '.then'  set state for categories
-    axios.get("https://opentdb.com/api_category.php")
-        .then((response) => {
-          setCategories(response.data.trivia_categories);
-    });
-  }, []);
-
   return (
-    <> 
-      <h1>Welcome to TRIVIA!!</h1>
-      {defaultView ? 
-      <>
-      <h2>Choose a topic and let's play!</h2>
-      <div className="category-list">
-        {/* map creates a new array */}
-        {categories.map((category) => (
-          <Category
-            name={category.name}
-            categId={category.id}
-            key={category.id}
-            clickHandler={getQuestionArray}
-          />
-        ))}
+    <main>
+      <header>Let's Play Trivia!</header>
+  {/* // Ternary operator syntax
+  //condition ? what to do if true : what to do if false */}
+    <div id="container">
+    {questions.length > 0 ? (
+      <div>
+      {questions.map((question, idx) => { //idx - index pos of the question
+        return (                          //for every quest in array this is what shoudl look like
+            <QuestionSet 
+              key={idx} 
+              question={question} 
+              setScore={setScore} 
+              score={score}
+            />
+          );
+        })}
+        <button onClick={() => setEndGame(true)}>Click to Finish</button> 
       </div>
-    </> :
-      <>
-      <h2>Let's play True or False!</h2>
-      <button onClick={() => setDefaultView(true)}>
-            Return Home (exit current game)
-          </button>
-      <div className="question-view">
-        {/* map creates a new array */}
-        {questionArray.map((quest, index) => (
-          <Question
-            key={index}
-            questId={index}
-            question={quest.question}
-            correct_answer={quest.correct_answer}
-            incorrect_answers={quest.incorrect_answers}
-            // clickHandler={getQuestionArray}
-          />
-        ))}
+    ) : (
+      categories.map((category) => { 
+          return (
+            <CategorySelect 
+              key={category.id}
+              category={category} 
+              setSelected={setSelected}  //need this for the child to be able to bubble up state
+            />
+            );
+          })
+        )}
       </div>
-      </> 
-      }
-    </>
-    )}
+      <footer>By Brittany Craig ...and React</footer>
+    </main>
+    );
+  };
+
 export default App;
-// {quest.incorrect_answers.map((incorrect, idx) => (
-              
-//   )
-//one object- trivia categories
-//let newAnswers = [correctAnswer, ...answers];
-// {dataItems.map((item, index) => (
-//   <div key={index}>
-//     <h1>{item.title}</h1>
-//     {item.content.map((c, i) => (
-//       <div key={i}>
-//         <img src={c.imageUrl} />
-//         <h3>{c.title}</h3>
-//         <h3>{c.description}</h3>
-//         <hr />
-//       </div>
-//     ))}
-//   </div>
-// ))}

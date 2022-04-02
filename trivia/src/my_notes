@@ -1,0 +1,21 @@
+// Alternate way to do this: 
+
+// const Question = ({question, correct_answer, incorrect_answers, index}) => {
+
+//     let allAnswersArray = incorrect_answers; //assigning incorrect_answers to new array 'allAnswersArray'
+//       allAnswersArray = [...allAnswersArray, correct_answer] //adding in the correct_answer
+//       // console.log(`all answers: ${allAnswersArray}`)
+
+
+
+//       is
+
+
+//       const Question = ({question, correct_answer, incorrect_answers, index}) => {
+
+//         const allAnswersArray = [correct_answer]; //assigning correct_answer to new array 'allAnswersArray'
+//           incorrect_answers.forEach((answer) => {  //take each answer in the incorrect_answer array and push into the new AllAnswersArray
+//               allAnswersArray.push(answer);
+//           });
+
+//state - if going to be a number, set as (null) when declaring
