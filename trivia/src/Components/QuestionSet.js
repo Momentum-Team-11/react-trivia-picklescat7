@@ -6,7 +6,7 @@ const QuestionSet = ({ question, setScore, score, idx}) => {
 
   let allAnswersArray =  question.incorrect_answers; //assigning incorrect_answers to new array 'allAnswersArray'
     allAnswersArray = [...allAnswersArray, question.correct_answer ] //adding in the correct_answer
-    console.log(`all answers: ${allAnswersArray}`)
+    // console.log(`all answers: ${allAnswersArray}`)
     
     //working shuffle function - bless you for once stackoverflow
     const shuffleArray = (array) => {
@@ -24,37 +24,40 @@ const QuestionSet = ({ question, setScore, score, idx}) => {
 
       <div className="answer-buttons">
         <button id="btn-1" key={idx} disabled={isAnswered}  //once isAnswered state becomes true, it will disable the button
-          onClick=
-            {answersShuffled[0] === question.correct_answer ? (
-              console.log('correct answer selected'),
-              setScore((score += 1)),
-              console.log(score),
-              setIsAnswered(true),
-              setIsCorrect(true)
-            ) : (
-              console.log('incorrect answer selected'),
-              setIsCorrect(false),
+          onClick={()=> { 
+            if (answersShuffled[0] === question.correct_answer) { 
+              console.log('correct answer selected')
+              setScore((score += 1))
+              console.log(score)
               setIsAnswered(true)
-            )
+              setIsCorrect(true)
+            } else { 
+              console.log('incorrect answer selected')
+              setIsCorrect(false)
+              setIsAnswered(true)
+            }
           }
+        }    
         >
           {answersShuffled[0]}</button>
 
-          <button id= "btn-2" key={idx} disabled={isAnswered}
-            onClick={answersShuffled[1] === question.correct_answer ? (
-              console.log('correct answer selected'),
-              setScore((score += 1)),
-              console.log(score),
-              setIsAnswered(true),
-              setIsCorrect(true)
-            ) : (
-              console.log('incorrect answer selected'),
-              setIsCorrect(false),
+        <button id= "btn-2" key={idx} disabled={isAnswered}
+          onClick={()=> { 
+            if (answersShuffled[1] === question.correct_answer) { 
+              console.log('correct answer selected')
+              setScore((score += 1))
+              console.log(score)
               setIsAnswered(true)
-            )
+              setIsCorrect(true)
+            } else { 
+              console.log('incorrect answer selected')
+              setIsCorrect(false)
+              setIsAnswered(true)
+            }
           }
-          >
-            {answersShuffled[1]}</button>
+        }    
+        >
+          {answersShuffled[1]}</button>
       </div>
     </div>
   );

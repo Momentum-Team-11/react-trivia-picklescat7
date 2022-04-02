@@ -48,19 +48,19 @@ function App() {
 
 
 
-  //   let handleClick = (i) => {
-  //     if (answersShuffled[i] === question.correct_answer) {
-  //       console.log('correct answer selected');
-  //             setScore((score += 1));
-  //             console.log(score);
-  //             setIsAnswered(true);
-  //             setIsCorrect(true);
-  //   }
-  //   console.log('incorrect answer selected');
-  //   setIsCorrect(false)
-  //   setIsAnswered(true)
-  // }
-  // console.log(handleClick[1])
+    let handleClick = (i) => {
+      if (answersShuffled[i] === question.correct_answer) {
+        console.log('correct answer selected');
+              setScore((score += 1));
+              console.log(score);
+              setIsAnswered(true);
+              setIsCorrect(true);
+    }
+    console.log('incorrect answer selected');
+    setIsCorrect(false)
+    setIsAnswered(true)
+  }
+  console.log(handleClick[1])
 
 
 <div className="answer-buttons">

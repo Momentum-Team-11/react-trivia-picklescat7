@@ -8,13 +8,14 @@ import EndGame from "./Components/EndGame";
 
 const App = () => {
   const categoriesURL = "https://opentdb.com/api_category.php"; 
-  const questionsURL = "https://opentdb.com/api.php?amount=1&type=boolean&category="; 
+  const questionsURL = "https://opentdb.com/api.php?amount=5&type=boolean&category="; 
   //helper function below to set state
   const [categories, setCategories] = useState([]); //set to empty array so state knows what shape of data
   const [selected, setSelected] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [score, setScore] = useState(0);
   const [endGame, setEndGame] = useState(false);
+	const [defaultView, setDefaultView] = useState(true) //aka "home page"
 
 //ask for a list of categories
   useEffect(() => {
@@ -29,6 +30,7 @@ const App = () => {
     axios.get(questionsURL + `${selected}`).then((response) => {
       console.log(response);
       setQuestions(response.data.results);
+			setDefaultView(false)
     });
   }, [selected])
 
@@ -48,6 +50,7 @@ const App = () => {
   {/* // Ternary operator syntax
   //condition ? what to do if true : what to do if false */}
     <div id="container">
+		<button onClick={() => setDefaultView(true)}>Return Home (exit current game)</button> 
     {questions.length > 0 ? (
       <div>
       {questions.map((question, idx) => { //idx - index pos of the question
