@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+
 //specific job of this component- did they click the right answer? if so, increment up the score
 const QuestionSet = ({ question, setScore, score, idx}) => {
-  const [isAnswered, setIsAnswered] = useState(false)
-  const [correct, setIsCorrect] = useState(null)
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [correct, setIsCorrect] = useState(null);
+  // const { width, height } = useWindowSize();
 
   let allAnswersArray =  question.incorrect_answers; //assigning incorrect_answers to new array 'allAnswersArray'
     allAnswersArray = [...allAnswersArray, question.correct_answer ] //adding in the correct_answer
@@ -18,7 +20,6 @@ const QuestionSet = ({ question, setScore, score, idx}) => {
     const answersShuffled = allAnswersArray
     shuffleArray(answersShuffled)
     
-
   return (
     <div className="question-container">
       <p>{question.question}</p>
@@ -63,7 +64,7 @@ const QuestionSet = ({ question, setScore, score, idx}) => {
       <div id="message">
         {correct === true && (
           <div id="correct-msg">
-          Yaaas you got it right!
+            Yaaas you got it right!
           </div>
           )
         } 

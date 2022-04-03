@@ -41,8 +41,6 @@ const App = () => {
           score={score}
 					setDefaultView={setDefaultView}
 					defaultView={defaultView}
-					setSelected={setSelected}
-					selected={selected}
 					setEndGame={setEndGame}
       />
 		
