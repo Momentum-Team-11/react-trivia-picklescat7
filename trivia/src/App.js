@@ -34,25 +34,30 @@ const App = () => {
     });
   }, [selected])
 
-  if (endGame) {
+  if (endGame && !defaultView) {
     return (
       <div>
         <EndGame
           score={score}
+					setDefaultView={setDefaultView}
+					defaultView={defaultView}
+					setSelected={setSelected}
+					selected={selected}
+					setEndGame={setEndGame}
       />
+		
     </div>
     )
   }
-
   return (
     <main>
       <header>Let's Play Trivia!</header>
   {/* // Ternary operator syntax
   //condition ? what to do if true : what to do if false */}
     <div id="container">
-		<button onClick={() => setDefaultView(true)}>Return Home (exit current game)</button> 
-    {questions.length > 0 ? (
+    {(questions.length > 0 && !defaultView) ? (
       <div>
+			<button onClick={() => setDefaultView(true)}>Return Home/Change Category</button> 
       {questions.map((question, idx) => { //idx - index pos of the question
         return (                          //for every quest in array this is what shoudl look like
             <QuestionSet 
@@ -72,6 +77,7 @@ const App = () => {
               key={category.id}
               category={category} 
               setSelected={setSelected}  //need this for the child to be able to bubble up state
+							setDefaultView={setDefaultView}
             />
             );
           })

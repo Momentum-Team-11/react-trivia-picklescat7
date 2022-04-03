@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 //specific job of this component- did they click the right answer? if so, increment up the score
 const QuestionSet = ({ question, setScore, score, idx}) => {
   const [isAnswered, setIsAnswered] = useState(false)
-  const [correct, setIsCorrect] = useState(false)
+  const [correct, setIsCorrect] = useState(null)
 
   let allAnswersArray =  question.incorrect_answers; //assigning incorrect_answers to new array 'allAnswersArray'
     allAnswersArray = [...allAnswersArray, question.correct_answer ] //adding in the correct_answer
@@ -17,6 +17,7 @@ const QuestionSet = ({ question, setScore, score, idx}) => {
     }
     const answersShuffled = allAnswersArray
     shuffleArray(answersShuffled)
+    
 
   return (
     <div className="question-container">
@@ -58,6 +59,20 @@ const QuestionSet = ({ question, setScore, score, idx}) => {
         }    
         >
           {answersShuffled[1]}</button>
+      </div>
+      <div id="message">
+        {correct === true && (
+          <div id="correct-msg">
+          Yaaas you got it right!
+          </div>
+          )
+        } 
+        {correct === false && (
+          <div id="incorrect-msg">
+          Nooooo that was wrong!
+          </div>
+          )
+        } 
       </div>
     </div>
   );

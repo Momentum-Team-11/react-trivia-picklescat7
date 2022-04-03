@@ -1,13 +1,14 @@
 import React from "react";
 
 //Category will render the categories and save which one has been selected
-const CategorySelect = ({ category, setSelected }) => {
+const CategorySelect = ({ category, setSelected, setDefaultView }) => {
   return (
     <div className="category-select">
       <button className="category-btn"
         onClick={() => {
           console.log("category selected!");
           setSelected(category.id);
+          setDefaultView(false)
         }}
       >
         {category.name}
