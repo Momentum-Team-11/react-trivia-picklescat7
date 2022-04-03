@@ -17,8 +17,8 @@ const App = () => {
     axios.get(`https://opentdb.com/api.php?amount=10&category=${categId}&type=multiple`)
       .then((response) => {
         setDefaultView(false);
-        setQuestionArray(response.data.results);
-        setOneQuestion(response.data.results[0]);        
+        setQuestionArray(response.data.results[0]);
+        // setFirstQuestion(response.data.results[0]);        
     console.log("Click Happened");
     console.log(response);
     console.log(oneQuestion); //displays first question set 

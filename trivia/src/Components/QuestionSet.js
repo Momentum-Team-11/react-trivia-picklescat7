@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
 //specific job of this component- did they click the right answer? if so, increment up the score
-const QuestionSet = ({ question, setScore, score, idx}) => {
+const QuestionSet = ({ question, setScore, score, idx, i, questionArray}) => {
   const [isAnswered, setIsAnswered] = useState(false);
+  const [currentQuest, setCurrentQuest] = useState(0);
   const [correct, setIsCorrect] = useState(null);
-  // const { width, height } = useWindowSize();
+  
+  // console.log("testing" + question[1].question)
+  
 
   let allAnswersArray =  question.incorrect_answers; //assigning incorrect_answers to new array 'allAnswersArray'
     allAnswersArray = [...allAnswersArray, question.correct_answer ] //adding in the correct_answer
@@ -19,10 +22,21 @@ const QuestionSet = ({ question, setScore, score, idx}) => {
     }
     const answersShuffled = allAnswersArray
     shuffleArray(answersShuffled)
+  
+  // let firstObject = question[0];
+  //   console.log(firstObject)
     
+
+  //feature doesn't work yet
+    const getNext = () => {
+      setCurrentQuest(questionArray[i+1]);
+    };
+
   return (
     <div className="question-container">
-      <p>{question.question}</p>
+      <ol>
+        <p>{question.question}</p>
+      
 
       <div className="answer-buttons">
         <button id="btn-1" key={idx} disabled={isAnswered}  //once isAnswered state becomes true, it will disable the button
@@ -75,6 +89,8 @@ const QuestionSet = ({ question, setScore, score, idx}) => {
           )
         } 
       </div>
+      <button id="btn-next" onClick={() => getNext()}>Next </button>
+      </ol>
     </div>
   );
 };
