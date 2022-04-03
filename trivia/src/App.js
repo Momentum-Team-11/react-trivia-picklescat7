@@ -30,6 +30,7 @@ const App = () => {
     axios.get(questionsURL + `${selected}`).then((response) => {
       console.log(response);
       setQuestionArray(response.data.results);
+      //setQuestionArray(response.data.results[0]); //error when tryingthis- related to .map on line 60, I think
 			setDefaultView(false)
     });
   }, [selected])
@@ -64,6 +65,7 @@ const App = () => {
               setScore={setScore} 
               score={score}
               questionArray={questionArray}
+              setQuestionArray={setQuestionArray}
               i={idx}
             />
           );

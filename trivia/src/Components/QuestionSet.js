@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 //specific job of this component- did they click the right answer? if so, increment up the score
-const QuestionSet = ({ question, setScore, score, idx, i, questionArray}) => {
+const QuestionSet = ({ question, setScore, score, idx, i, questionArray, setQuestionArray}) => {
   const [isAnswered, setIsAnswered] = useState(false);
-  const [currentQuest, setCurrentQuest] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [correct, setIsCorrect] = useState(null);
   
   // console.log("testing" + question[1].question)
@@ -29,7 +29,9 @@ const QuestionSet = ({ question, setScore, score, idx, i, questionArray}) => {
 
   //feature doesn't work yet
     const getNext = () => {
-      setCurrentQuest(questionArray[i+1]);
+      setCurrentQuestion(setQuestionArray[i+1]);
+      console.log(questionArray[i])
+      console.log(currentQuestion)
     };
 
   return (
