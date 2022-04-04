@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 //specific job of this component- did they click the right answer? if so, increment up the score
-const Quiz = ({ question, setScore, score, idx, i, questionArray, setQuestionArray}) => {
+const Quiz = ({ question, setScore, score, idx, i, questionArray, setQuestionArray, currentQuestion, setCurrentQuestion}) => {
   const [isAnswered, setIsAnswered] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState([]);
+  // const [currentQuestion, setCurrentQuestion] = useState(0);
   const [correct, setIsCorrect] = useState(null);
   const [clicked, setClicked] = useState(false);
 
@@ -21,11 +21,11 @@ const Quiz = ({ question, setScore, score, idx, i, questionArray, setQuestionArr
   // getFirst()
 
   const getNext = () => {
-    setCurrentQuestion(setQuestionArray[i+1]);
-    console.log(questionArray[i])
-    console.log("question" + questionArray[i].question)
-    console.log("correct answer" + questionArray[i].correct_answer)
-    console.log("incorrect answer: " + questionArray[i].incorrect_answers)
+    setCurrentQuestion(i+1);
+    // console.log(questionArray[i])
+    // console.log("question" + questionArray[i].question)
+    // console.log("correct answer" + questionArray[i].correct_answer)
+    // console.log("incorrect answer: " + questionArray[i].incorrect_answers)
     // console.log("shuffled answers" + questionArray[i].answersShuffled)
     // console.log(currentQuestion.question)
   };
@@ -48,9 +48,6 @@ const Quiz = ({ question, setScore, score, idx, i, questionArray, setQuestionArr
   // let firstObject = question[0];
   //   console.log(firstObject)
     
-
-
-
   return (
     <div className="question-container">
       <ol>

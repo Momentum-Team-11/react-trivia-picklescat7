@@ -13,7 +13,7 @@ const App = () => {
   const [categories, setCategories] = useState([]); //set to empty array so state knows what shape of data
   const [selected, setSelected] = useState(null);
   const [questionArray, setQuestionArray] = useState([]);
-  const [currentQuestion, setCurrentQuestion] = useState([])
+  const [currentQuestion, setCurrentQuestion] = useState(0)
   const [score, setScore] = useState(0);
   const [endGame, setEndGame] = useState(false);
 	const [defaultView, setDefaultView] = useState(true) //aka "home page"
@@ -30,8 +30,7 @@ const App = () => {
   useEffect(() => {
     axios.get(questionsURL + `${selected}`).then((response) => {
       console.log(response);
-      setQuestionArray(response.data.results);
-      setCurrentQuestion(response.data.results[0]); 
+      setQuestionArray(response.data.results); 
 			setDefaultView(false)
       // console.log(question1)
     });
@@ -45,6 +44,7 @@ const App = () => {
 					setDefaultView={setDefaultView}
 					defaultView={defaultView}
 					setEndGame={setEndGame}
+          setCurrentQuestion={setCurrentQuestion}
       />
     </div>
     )
@@ -59,6 +59,7 @@ const App = () => {
       <div>
 			<button onClick={() => setDefaultView(true)}>Return Home/Change Category</button> 
       {questionArray.map((question, idx) => { //idx - index pos of the question
+      if (idx === currentQuestion ) {
         return (                          //for every quest in array this is what shoudl look like
             <Quiz 
               key={idx} 
@@ -72,6 +73,10 @@ const App = () => {
               currentQuestion={currentQuestion}
             />
           );
+        } else {
+          return null
+          
+        }
         })}
         <button onClick={() => setEndGame(true)}>Click to Finish</button> 
       </div>

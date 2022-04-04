@@ -1,7 +1,7 @@
 import React from "react";
 import Confetti from "react-confetti";
 
-const EndGame = ({ score, defaultView, setDefaultView, setEndGame }) => {
+const EndGame = ({ score, setDefaultView, setEndGame, setCurrentQuestion }) => {
   const sgColors = [
     "#9ce8c2",
     "#60d399",
@@ -14,7 +14,7 @@ const EndGame = ({ score, defaultView, setDefaultView, setEndGame }) => {
     "#fedd8e",
     "#fbbe2e"
   ];
-  
+
   return (
   <>
   <Confetti 
@@ -27,6 +27,7 @@ const EndGame = ({ score, defaultView, setDefaultView, setEndGame }) => {
       onClick={() => {
         setDefaultView(true)
         setEndGame(false)
+        setCurrentQuestion(0)
       }}
     >
       Play Again
