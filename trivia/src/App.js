@@ -54,7 +54,7 @@ const App = () => {
   {/* // Ternary operator syntax
   //condition ? what to do if true : what to do if false */}
     <div id="container">
-    { !defaultView ? (
+    { questionArray.length > 0 && !defaultView ? (
       <div>
 			<button onClick={() => setDefaultView(true)}>Return Home/Change Category</button> 
       {questionArray.map((question, idx) => { //idx - index pos of the question

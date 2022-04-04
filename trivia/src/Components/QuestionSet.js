@@ -38,8 +38,7 @@ const QuestionSet = ({ question, setScore, score, idx, i, questionArray, setQues
     <div className="question-container">
       <ol>
         <p>{question.question}</p>
-      
-
+  
       <div className="answer-buttons">
         <button id="btn-1" key={idx} disabled={isAnswered}  //once isAnswered state becomes true, it will disable the button
           onClick={()=> { 
