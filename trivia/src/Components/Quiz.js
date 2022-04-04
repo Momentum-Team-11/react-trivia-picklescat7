@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { decode } from 'html-entities';
+import 'bulma/css/bulma.min.css';
+import { Button, Box } from 'react-bulma-components';
 
 //specific job of this component- did they click the right answer? if so, increment up the score
-const Quiz = ({ question, setScore, score, idx, i, questionArray, setQuestionArray, currentQuestion, setCurrentQuestion}) => {
+const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion}) => {
   const [isAnswered, setIsAnswered] = useState(false);
   // const [currentQuestion, setCurrentQuestion] = useState(0);
   const [correct, setIsCorrect] = useState(null);
-  const [clicked, setClicked] = useState(false);
+  // const [clicked, setClicked] = useState(false);
 
   
   // console.log("testing" + question[1].question)
@@ -49,12 +52,13 @@ const Quiz = ({ question, setScore, score, idx, i, questionArray, setQuestionArr
   //   console.log(firstObject)
     
   return (
-    <div className="question-container">
+  <>
+    <Box className="question-container">
       <ol>
-        <p>{question.question}</p>
+        <p>{decode(question.question)}</p>
   
-      <div className="answer-buttons">
-        <button id="btn-1" key={idx} disabled={isAnswered}  //once isAnswered state becomes true, it will disable the button
+      <Button.Group className="answer-buttons">
+        <Button color="" id="btn-1" key={idx} disabled={isAnswered}  //once isAnswered state becomes true, it will disable the button
           onClick={()=> { 
             if (answersShuffled[0] === question.correct_answer) { 
               console.log('correct answer selected')
@@ -70,9 +74,9 @@ const Quiz = ({ question, setScore, score, idx, i, questionArray, setQuestionArr
           }
         }    
         >
-          {answersShuffled[0]}</button>
+          {answersShuffled[0]}</Button>
 
-        <button id= "btn-2" key={idx} disabled={isAnswered}
+        <Button color="" renderAs="span" id= "btn-2" key={idx} disabled={isAnswered}
           onClick={()=> { 
             if (answersShuffled[1] === question.correct_answer) { 
               console.log('correct answer selected')
@@ -88,8 +92,8 @@ const Quiz = ({ question, setScore, score, idx, i, questionArray, setQuestionArr
           }
         }    
         >
-          {answersShuffled[1]}</button>
-      </div>
+          {answersShuffled[1]}</Button>
+      </Button.Group>
       <div id="message">
         {correct === true && (
           <div id="correct-msg">
@@ -99,14 +103,16 @@ const Quiz = ({ question, setScore, score, idx, i, questionArray, setQuestionArr
         } 
         {correct === false && (
           <div id="incorrect-msg">
-          Nooooo that was wrong!
+          Nooooo that was wrong! 
+          The correct answer is {question.correct_answer}
           </div>
           )
         } 
       </div>
-      <button id="btn-next" onClick={() => getNext()}>Next </button>
+      <Button color="warning" id="btn-next" onClick={() => getNext()}>Next </Button>
       </ol>
-    </div>
+    </Box>
+    </>
   );
 };
 

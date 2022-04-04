@@ -2,8 +2,10 @@ import "./styles.css";
 import { useState, useEffect } from "react";
 import axios from "axios"
 import CategorySelect from "./Components/CategorySelect";
-import Quiz from "./Components/QuestionSet";
+import Quiz from "./Components/Quiz";
 import EndGame from "./Components/EndGame";
+import 'bulma/css/bulma.min.css';
+import { Button, Box, Heading } from 'react-bulma-components';
 
 
 const App = () => {
@@ -38,7 +40,7 @@ const App = () => {
 
   if (endGame && !defaultView) {
     return (
-      <div>
+      <div style={{ margin: '10%' }}>
         <EndGame
           score={score}
 					setDefaultView={setDefaultView}
@@ -49,15 +51,15 @@ const App = () => {
     </div>
     )
   }
-  return (
-    <main>
-      <header>Let's Play Trivia!</header>
+  return (   
+    <div style={{ margin: '10%' }}>
+      <Heading color="success">Let's Play Trivia!</Heading>
   {/* // Ternary operator syntax
   //condition ? what to do if true : what to do if false */}
     <div id="container">
     { questionArray.length > 0 && !defaultView ? (
       <div>
-			<button onClick={() => setDefaultView(true)}>Return Home/Change Category</button> 
+			<Button color="info" onClick={() => setDefaultView(true)}>Return Home/Change Category</Button>
       {questionArray.map((question, idx) => { //idx - index pos of the question
       if (idx === currentQuestion ) {
         return (                          //for every quest in array this is what shoudl look like
@@ -78,10 +80,19 @@ const App = () => {
           
         }
         })}
-        <button onClick={() => setEndGame(true)}>Click to Finish</button> 
+        <Button color="success" onClick={() => setEndGame(true)}>Click to Finish Game</Button> 
       </div>
     ) : (
-      categories.map((category) => { 
+      <Box 
+        style={{
+          alignItems: 'center',
+          display: 'flex-wrap',
+          height: '60%',
+          justifyContent: 'center',
+          margin: 'auto'
+        }}
+      >
+      {categories.map((category) => { 
           return (
             <CategorySelect 
               key={category.id}
@@ -90,11 +101,12 @@ const App = () => {
 							setDefaultView={setDefaultView}
             />
             );
-          })
+          })}
+        </Box>
         )}
       </div>
-      <footer>By Brittany Craig</footer>
-    </main>
+      {/* <Footer>By Brittany Craig</Footer> */}
+    </div>
     );
   };
 

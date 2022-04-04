@@ -1,19 +1,23 @@
 import React from "react";
+import 'bulma/css/bulma.min.css';
+import { Button} from 'react-bulma-components';
 
 //Category will render the categories and save which one has been selected
 const CategorySelect = ({ category, setSelected, setDefaultView }) => {
   return (
-    <div className="category-select">
-      <button className="category-btn"
-        onClick={() => {
-          console.log("category selected!");
-          setSelected(category.id);
-          setDefaultView(false)
-        }}
-      >
+    // <div className="category-select">
+      
+        <Button color="success" className="category-btn"
+          onClick={() => {
+            console.log("category selected!");
+            setSelected(category.id);
+            setDefaultView(false)
+          }}
+        >
         {category.name}
-      </button>
-    </div>
+        </Button>
+    
+    // </div>
   );
 };
 

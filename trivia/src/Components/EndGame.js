@@ -1,5 +1,7 @@
 import React from "react";
 import Confetti from "react-confetti";
+import 'bulma/css/bulma.min.css';
+import { Button, Box } from 'react-bulma-components';
 
 const EndGame = ({ score, setDefaultView, setEndGame, setCurrentQuestion }) => {
   const sgColors = [
@@ -16,14 +18,21 @@ const EndGame = ({ score, setDefaultView, setEndGame, setCurrentQuestion }) => {
   ];
 
   return (
-  <>
+  <Box
+    style={{
+    alignItems: 'center',
+    display: 'flex',
+    height: 600,
+    justifyContent: 'center'
+  }}
+  >
   <Confetti 
   className="canvas"
   colors={sgColors}
-  numberOfPieces={50}
+  numberOfPieces={100}
     />
   <p>Well done! Your score is: {score}</p>
-  <button id="play-again-btn"
+  <Button color="success" id="play-again-btn"
       onClick={() => {
         setDefaultView(true)
         setEndGame(false)
@@ -31,8 +40,8 @@ const EndGame = ({ score, setDefaultView, setEndGame, setCurrentQuestion }) => {
       }}
     >
       Play Again
-    </button> 
-  </>
+    </Button> 
+  </Box>
   )
 };
 
