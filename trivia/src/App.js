@@ -2,7 +2,7 @@ import "./styles.css";
 import { useState, useEffect } from "react";
 import axios from "axios"
 import CategorySelect from "./Components/CategorySelect";
-import QuestionSet from "./Components/QuestionSet";
+import Quiz from "./Components/QuestionSet";
 import EndGame from "./Components/EndGame";
 
 
@@ -13,6 +13,7 @@ const App = () => {
   const [categories, setCategories] = useState([]); //set to empty array so state knows what shape of data
   const [selected, setSelected] = useState(null);
   const [questionArray, setQuestionArray] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState([])
   const [score, setScore] = useState(0);
   const [endGame, setEndGame] = useState(false);
 	const [defaultView, setDefaultView] = useState(true) //aka "home page"
@@ -30,8 +31,9 @@ const App = () => {
     axios.get(questionsURL + `${selected}`).then((response) => {
       console.log(response);
       setQuestionArray(response.data.results);
-      //setQuestionArray(response.data.results[0]); //error when tryingthis- related to .map on line 60, I think
+      setCurrentQuestion(response.data.results[0]); 
 			setDefaultView(false)
+      // console.log(question1)
     });
   }, [selected])
 
@@ -44,7 +46,6 @@ const App = () => {
 					defaultView={defaultView}
 					setEndGame={setEndGame}
       />
-		
     </div>
     )
   }
@@ -59,14 +60,16 @@ const App = () => {
 			<button onClick={() => setDefaultView(true)}>Return Home/Change Category</button> 
       {questionArray.map((question, idx) => { //idx - index pos of the question
         return (                          //for every quest in array this is what shoudl look like
-            <QuestionSet 
+            <Quiz 
               key={idx} 
               question={question} 
               setScore={setScore} 
               score={score}
               questionArray={questionArray}
               setQuestionArray={setQuestionArray}
+              setCurrentQuestion={setCurrentQuestion}
               i={idx}
+              currentQuestion={currentQuestion}
             />
           );
         })}

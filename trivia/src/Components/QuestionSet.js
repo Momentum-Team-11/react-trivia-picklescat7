@@ -1,13 +1,35 @@
 import React, { useState } from 'react';
 
 //specific job of this component- did they click the right answer? if so, increment up the score
-const QuestionSet = ({ question, setScore, score, idx, i, questionArray, setQuestionArray}) => {
+const Quiz = ({ question, setScore, score, idx, i, questionArray, setQuestionArray}) => {
   const [isAnswered, setIsAnswered] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState([]);
   const [correct, setIsCorrect] = useState(null);
+  const [clicked, setClicked] = useState(false);
+
   
   // console.log("testing" + question[1].question)
-  
+    //feature doesn't work yet
+
+  //   const getFirst = () => {
+  //     if (!clicked) {
+  //       setCurrentQuestion(questionArray[0])
+  //       console.log("current question" + currentQuestion)
+  //     }
+  // };
+
+  // getFirst()
+
+  const getNext = () => {
+    setCurrentQuestion(setQuestionArray[i+1]);
+    console.log(questionArray[i])
+    console.log("question" + questionArray[i].question)
+    console.log("correct answer" + questionArray[i].correct_answer)
+    console.log("incorrect answer: " + questionArray[i].incorrect_answers)
+    // console.log("shuffled answers" + questionArray[i].answersShuffled)
+    // console.log(currentQuestion.question)
+  };
+
 
   let allAnswersArray =  question.incorrect_answers; //assigning incorrect_answers to new array 'allAnswersArray'
     allAnswersArray = [...allAnswersArray, question.correct_answer ] //adding in the correct_answer
@@ -27,12 +49,7 @@ const QuestionSet = ({ question, setScore, score, idx, i, questionArray, setQues
   //   console.log(firstObject)
     
 
-  //feature doesn't work yet
-    const getNext = () => {
-      setCurrentQuestion(setQuestionArray[i+1]);
-      console.log(questionArray[i])
-      console.log(currentQuestion)
-    };
+
 
   return (
     <div className="question-container">
@@ -96,7 +113,7 @@ const QuestionSet = ({ question, setScore, score, idx, i, questionArray, setQues
   );
 };
 
-export default QuestionSet;
+export default Quiz;
 
 
 //from version 1: 
