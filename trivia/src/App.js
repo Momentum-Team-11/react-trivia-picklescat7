@@ -47,6 +47,7 @@ const App = () => {
 					defaultView={defaultView}
 					setEndGame={setEndGame}
           setCurrentQuestion={setCurrentQuestion}
+          setScore={setScore}
       />
     </div>
     )
@@ -60,7 +61,7 @@ const App = () => {
     { questionArray.length > 0 && !defaultView ? (
       <div>
         <Block> 
-          <Button color="info" onClick={() => setDefaultView(true)}>Return Home/Change Category</Button> 
+          <Button color="success" onClick={() => setDefaultView(true)}>Return Home/Change Category</Button> 
         </Block>
       {questionArray.map((question, idx) => { //idx - index pos of the question
       if (idx === currentQuestion ) {
@@ -75,6 +76,7 @@ const App = () => {
               setCurrentQuestion={setCurrentQuestion}
               i={idx}
               currentQuestion={currentQuestion}
+              setEndGame={setEndGame}
             />
           );
         } else {
@@ -82,7 +84,7 @@ const App = () => {
           
         }
         })}
-        <Button color="success" onClick={() => setEndGame(true)}>Click to Finish Game</Button> 
+        {/* <Button color="success" onClick={() => setEndGame(true)}>End Game</Button>  */}
       </div>
     ) : (
       <Box 

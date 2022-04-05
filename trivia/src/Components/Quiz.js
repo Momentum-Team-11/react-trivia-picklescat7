@@ -4,7 +4,7 @@ import 'bulma/css/bulma.min.css';
 import { Button, Box, Block, Container, Notification } from 'react-bulma-components';
 
 //specific job of this component- did they click the right answer? if so, increment up the score
-const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion}) => {
+const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion, setEndGame}) => {
   const [isAnswered, setIsAnswered] = useState(false);
   // const [currentQuestion, setCurrentQuestion] = useState(0);
   const [correct, setIsCorrect] = useState(null);
@@ -56,7 +56,7 @@ const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion}) => {
     <Box className="question-container">
       <div>
         <Block>
-          <p>Question {i} /10</p>
+          <p>Question {i + 1} /5</p>
         </Block>
         <Block>
           <h3><strong>{decode(question.question)}</strong></h3>
@@ -124,7 +124,21 @@ const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion}) => {
         </Container>
       </Block>
 
-      <Button color="warning" id="btn-next" onClick={() => getNext()}>Next </Button>
+      <Button color="info" id="btn-next" onClick={()=> { 
+        if (i <= 4 && isAnswered) { 
+          getNext()
+        } 
+        if (i >= 4 && isAnswered) {
+          setEndGame(true)
+          console.log("hereeeee")
+          
+      // } else {
+      //     console.log("clicked without selecting an answer")
+        } 
+      }
+    }
+    >
+      Next </Button>
       </div>
     </Box>
     </>

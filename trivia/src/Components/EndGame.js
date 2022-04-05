@@ -3,7 +3,7 @@ import Confetti from "react-confetti";
 import 'bulma/css/bulma.min.css';
 import { Button, Box, Heading, Block } from 'react-bulma-components';
 
-const EndGame = ({ score, setDefaultView, setEndGame, setCurrentQuestion }) => {
+const EndGame = ({ score, setDefaultView, setEndGame, setCurrentQuestion, setScore}) => {
   const sgColors = [
     "#9ce8c2",
     "#60d399",
@@ -41,6 +41,7 @@ const EndGame = ({ score, setDefaultView, setEndGame, setCurrentQuestion }) => {
   <Block>
     <Button color="success" id="play-again-btn"
       onClick={() => {
+        setScore(0)
         setDefaultView(true)
         setEndGame(false)
         setCurrentQuestion(0)
