@@ -56,14 +56,15 @@ const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion, setEndGam
     <Box className="question-container">
       <div>
         <Block>
-          <p>Question {i + 1} /5</p>
+          <p>Question {i + 1} / 5</p>
         </Block>
         <Block>
-          <h3><strong>{decode(question.question)}</strong></h3>
+          <h2 size="4"><strong>{decode(question.question)}</strong></h2>
+          {/* <p size="small" color="warning">Click to select your answer</p> */}
         </Block>
       
       <Button.Group className="answer-buttons">
-        <Button color="" id="btn-1" key={idx} disabled={isAnswered}  //once isAnswered state becomes true, it will disable the button
+        <Button color="" size="large" id="btn-1" key={idx} disabled={isAnswered}  //once isAnswered state becomes true, it will disable the button
           onClick={()=> { 
             if (answersShuffled[0] === question.correct_answer) { 
               console.log('correct answer selected')
@@ -81,7 +82,7 @@ const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion, setEndGam
         >
           {answersShuffled[0]}</Button>
 
-        <Button color="" renderAs="span" id= "btn-2" key={idx} disabled={isAnswered}
+        <Button size="large" color="" renderAs="span" id= "btn-2" key={idx} disabled={isAnswered}
           onClick={()=> { 
             if (answersShuffled[1] === question.correct_answer) { 
               console.log('correct answer selected')
@@ -104,9 +105,7 @@ const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion, setEndGam
         <Container>
         {correct === true && (
           <Notification color="primary">
-          {/* <div id="correct-msg"> */}
             <strong>Yaaas you got it right!</strong>
-          {/* </div> */}
           </Notification>
           )
         } 
@@ -114,16 +113,13 @@ const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion, setEndGam
         <Container>
         {correct === false && (
           <Notification color="danger">
-          {/* <div id="incorrect-msg"> */}
             <strong>Nooooo that was wrong!</strong>
             <p>The correct answer is {question.correct_answer}.</p>
-          {/* </div> */}
           </Notification>
           )
         } 
         </Container>
       </Block>
-
       <Button color="info" id="btn-next" onClick={()=> { 
         if (i <= 4 && isAnswered) { 
           getNext()
@@ -131,7 +127,7 @@ const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion, setEndGam
         if (i >= 4 && isAnswered) {
           setEndGame(true)
           console.log("hereeeee")
-          
+  
       // } else {
       //     console.log("clicked without selecting an answer")
         } 
