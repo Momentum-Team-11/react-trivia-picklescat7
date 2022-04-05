@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { decode } from 'html-entities';
 import 'bulma/css/bulma.min.css';
-import { Button, Box } from 'react-bulma-components';
+import { Button, Box, Block, Container, Notification } from 'react-bulma-components';
 
 //specific job of this component- did they click the right answer? if so, increment up the score
 const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion}) => {
@@ -54,9 +54,14 @@ const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion}) => {
   return (
   <>
     <Box className="question-container">
-      <ol>
-        <p>{decode(question.question)}</p>
-  
+      <div>
+        <Block>
+          <p>Question {i} /10</p>
+        </Block>
+        <Block>
+          <h3><strong>{decode(question.question)}</strong></h3>
+        </Block>
+      
       <Button.Group className="answer-buttons">
         <Button color="" id="btn-1" key={idx} disabled={isAnswered}  //once isAnswered state becomes true, it will disable the button
           onClick={()=> { 
@@ -94,23 +99,33 @@ const Quiz = ({ question, setScore, score, idx, i, setCurrentQuestion}) => {
         >
           {answersShuffled[1]}</Button>
       </Button.Group>
-      <div id="message">
+      <Block id="message">
+        
+        <Container>
         {correct === true && (
-          <div id="correct-msg">
-            Yaaas you got it right!
-          </div>
+          <Notification color="primary">
+          {/* <div id="correct-msg"> */}
+            <strong>Yaaas you got it right!</strong>
+          {/* </div> */}
+          </Notification>
           )
         } 
+        </Container>
+        <Container>
         {correct === false && (
-          <div id="incorrect-msg">
-          Nooooo that was wrong! 
-          The correct answer is {question.correct_answer}
-          </div>
+          <Notification color="danger">
+          {/* <div id="incorrect-msg"> */}
+            <strong>Nooooo that was wrong!</strong>
+            <p>The correct answer is {question.correct_answer}.</p>
+          {/* </div> */}
+          </Notification>
           )
         } 
-      </div>
+        </Container>
+      </Block>
+
       <Button color="warning" id="btn-next" onClick={() => getNext()}>Next </Button>
-      </ol>
+      </div>
     </Box>
     </>
   );

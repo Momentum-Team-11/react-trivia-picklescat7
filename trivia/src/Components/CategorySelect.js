@@ -7,7 +7,7 @@ const CategorySelect = ({ category, setSelected, setDefaultView }) => {
   return (
     // <div className="category-select">
       
-        <Button color="success" className="category-btn"
+        <Button color="success" m="2" className="category-btn"
           onClick={() => {
             console.log("category selected!");
             setSelected(category.id);

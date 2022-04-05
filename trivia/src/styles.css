@@ -1,30 +1,36 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html { 
+  background: url("https://www.sightsavers.org/wp-content/uploads/2020/06/Quiz-Hero-Image_V01.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
+/* body { */
+  /* background-color: aqua; */
+  /* background-image: url("https://i.pinimg.com/564x/6d/95/6e/6d956e7b5854a8ac9c5c8f9b5a2ae8ca.jpg"); */
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+/* } */
+/* 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-} 
+}  */
 
 
-.category-list {
+/* .category-list {
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
-.category-btn {
+/* .category-btn {
   margin: 4px;
-  /* background-color:plum; */
-  /* color: gray;  */
-}
+} */
+  /* color: gray;  
 
-.canvas {
+
+/* .canvas {
   width: 120%;
   height: auto;
-}
+}  */

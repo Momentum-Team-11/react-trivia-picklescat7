@@ -5,7 +5,7 @@ import CategorySelect from "./Components/CategorySelect";
 import Quiz from "./Components/Quiz";
 import EndGame from "./Components/EndGame";
 import 'bulma/css/bulma.min.css';
-import { Button, Box, Heading } from 'react-bulma-components';
+import { Button, Box, Block, Heading } from 'react-bulma-components';
 
 
 const App = () => {
@@ -53,13 +53,15 @@ const App = () => {
   }
   return (   
     <div style={{ margin: '10%' }}>
-      <Heading color="success">Let's Play Trivia!</Heading>
+      <Heading><strong>Let's Play Trivia!</strong></Heading>
   {/* // Ternary operator syntax
   //condition ? what to do if true : what to do if false */}
     <div id="container">
     { questionArray.length > 0 && !defaultView ? (
       <div>
-			<Button color="info" onClick={() => setDefaultView(true)}>Return Home/Change Category</Button>
+        <Block> 
+          <Button color="info" onClick={() => setDefaultView(true)}>Return Home/Change Category</Button> 
+        </Block>
       {questionArray.map((question, idx) => { //idx - index pos of the question
       if (idx === currentQuestion ) {
         return (                          //for every quest in array this is what shoudl look like
@@ -85,10 +87,11 @@ const App = () => {
     ) : (
       <Box 
         style={{
-          alignItems: 'center',
+          alignItems: 'stretch',
+          flexDirection: 'column',
           display: 'flex-wrap',
           height: '60%',
-          justifyContent: 'center',
+          // justifyContent: 'center',
           margin: 'auto'
         }}
       >
